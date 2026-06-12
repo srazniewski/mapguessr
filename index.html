@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MapGuessR - identify a mystery place from an unlabeled map excerpt.">
+  <title>MapGuessR</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="preconnect" href="https://a.basemaps.cartocdn.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="MapGuessR home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="brand-pin"></span>
+        </span>
+        <span>Map<span>GuessR</span></span>
+      </a>
+
+      <div class="round-progress" id="roundProgress" aria-label="Round progress">
+        <span class="round-label">Round <strong id="roundNumber">1</strong>/5</span>
+        <div class="round-dots" aria-hidden="true">
+          <span class="active"></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="score-pill">
+        <span>Total score</span>
+        <strong id="totalScore">0</strong>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-copy">
+        <div>
+          <p class="eyebrow">Somewhere on Earth</p>
+          <h1>Where in the world is this?</h1>
+          <p>Study the map excerpt, then place your pin on the world map.</p>
+        </div>
+        <div class="difficulty-wrap">
+          <span class="control-label">Difficulty</span>
+          <div class="segmented" role="group" aria-label="Difficulty">
+            <button type="button" data-difficulty="easy">Easy</button>
+            <button type="button" class="active" data-difficulty="medium">Medium</button>
+            <button type="button" data-difficulty="hard">Hard</button>
+          </div>
+          <span class="extent-label" id="extentLabel">~10 km excerpt</span>
+        </div>
+      </section>
+
+      <section class="game-grid">
+        <article class="map-card clue-card">
+          <div class="card-heading">
+            <div>
+              <span class="step-number">01</span>
+              <div>
+                <h2>Study the excerpt</h2>
+                <p>Labels and borders are hidden</p>
+              </div>
+            </div>
+            <span class="map-scale" id="mapScale">10 × 10 km</span>
+          </div>
+          <div class="map-frame">
+            <div id="clueMap" class="map" aria-label="Mystery map excerpt"></div>
+            <div class="map-corner-note">N</div>
+          </div>
+        </article>
+
+        <article class="map-card guess-card">
+          <div class="card-heading">
+            <div>
+              <span class="step-number coral">02</span>
+              <div>
+                <h2>Make your guess</h2>
+                <p>Click anywhere to place your pin</p>
+              </div>
+            </div>
+            <button type="button" class="clear-button" id="clearGuess" disabled>Clear pin</button>
+          </div>
+          <div class="map-frame">
+            <div id="guessMap" class="map" aria-label="World map for placing your guess"></div>
+            <div class="guess-prompt" id="guessPrompt">
+              <span class="prompt-pin"></span>
+              Drop your pin
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="action-bar">
+        <div class="round-stat">
+          <span>Round score</span>
+          <strong id="roundScore">—</strong>
+        </div>
+        <button class="primary-button" id="submitGuess" type="button" disabled>
+          <span id="submitText">Place a pin to guess</span>
+          <span aria-hidden="true">→</span>
+        </button>
+        <p class="keyboard-tip"><kbd>Enter</kbd> to submit</p>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="resultModal" hidden>
+    <section class="result-modal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+      <button class="modal-close" id="modalClose" aria-label="Close result">×</button>
+      <p class="eyebrow" id="resultEyebrow">Round complete</p>
+      <h2 id="resultTitle">Nice detective work.</h2>
+      <div class="result-score">
+        <strong id="resultPoints">0</strong>
+        <span>points</span>
+      </div>
+      <p class="distance-copy">Your guess was <strong id="resultDistance">0 km</strong> away.</p>
+      <div class="location-reveal">
+        <span>The mystery location was</span>
+        <strong id="resultLocation">Unknown</strong>
+      </div>
+      <button class="primary-button modal-button" id="nextRound" type="button">
+        <span>Next round</span><span aria-hidden="true">→</span>
+      </button>
+    </section>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
