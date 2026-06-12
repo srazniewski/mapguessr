@@ -2,6 +2,10 @@
 
 A browser-based geography game using OpenStreetMap data. Study a labeled map excerpt, place a pin on the world map, and score up to 5,000 points based on distance.
 
+Rounds are sampled from a worldwide set of lesser-known regional anchors, then
+randomly offset into nearby towns, suburbs, or countryside. Major world-city
+centers are deliberately excluded.
+
 ## Run
 
 Serve this folder with any static web server:

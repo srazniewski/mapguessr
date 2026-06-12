@@ -1,4 +1,4 @@
-const LOCATIONS = [
+const LEGACY_LOCATIONS = [
   { name: "Amsterdam, Netherlands", lat: 52.3676, lng: 4.9041 },
   { name: "Cape Town, South Africa", lat: -33.9249, lng: 18.4241 },
   { name: "Kyoto, Japan", lat: 35.0116, lng: 135.7681 },
@@ -30,6 +30,8 @@ const LOCATIONS = [
   { name: "Taipei, Taiwan", lat: 25.033, lng: 121.5654 },
   { name: "Oslo, Norway", lat: 59.9139, lng: 10.7522 }
 ];
+
+const LOCATIONS = HARDER_LOCATIONS;
 
 const DIFFICULTIES = {
   easy: { km: 100, label: "~100 km excerpt" },
@@ -126,9 +128,20 @@ function chooseLocation() {
     state.usedLocations.clear();
     available = [...LOCATIONS];
   }
-  const location = available[Math.floor(Math.random() * available.length)];
-  state.usedLocations.add(LOCATIONS.indexOf(location));
-  return location;
+  const anchor = available[Math.floor(Math.random() * available.length)];
+  state.usedLocations.add(LOCATIONS.indexOf(anchor));
+
+  const distance = Math.sqrt(Math.random()) * anchor.radius;
+  const bearing = Math.random() * Math.PI * 2;
+  const latitudeOffset = (distance * Math.cos(bearing)) / 111;
+  const longitudeScale = Math.max(0.2, Math.cos(anchor.lat * Math.PI / 180));
+  const longitudeOffset = (distance * Math.sin(bearing)) / (111 * longitudeScale);
+
+  return {
+    name: anchor.name,
+    lat: anchor.lat + latitudeOffset,
+    lng: anchor.lng + longitudeOffset
+  };
 }
 
 function startRound() {
