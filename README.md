@@ -1,6 +1,6 @@
 # MapGuessR
 
-A browser-based geography game using OpenStreetMap data. Study an unlabeled map excerpt, place a pin on the world map, and score up to 5,000 points based on distance.
+A browser-based geography game using OpenStreetMap data. Study a labeled map excerpt, place a pin on the world map, and score up to 5,000 points based on distance.
 
 ## Run
 
@@ -20,4 +20,4 @@ An internet connection is required for map tiles and web fonts.
 - Medium: approximately 10 × 10 km
 - Hard: approximately 1 × 1 km
 
-Map data is provided by OpenStreetMap contributors. The unlabeled clue style is served by CARTO.
+Map data is provided by OpenStreetMap contributors. The labeled clue style is served by CARTO.
